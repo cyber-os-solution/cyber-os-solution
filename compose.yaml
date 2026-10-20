@@ -1,0 +1,7 @@
+services:
+  worker:
+    build:
+      context: ./apps/worker
+    env_file:
+      - ./apps/worker/.env
+    restart: unless-stopped
