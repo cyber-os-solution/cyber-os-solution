@@ -9,6 +9,7 @@ Plataforma SaaS multi-tenant para atendimento, automação e relacionamento.
 - `packages/*`: contratos reutilizáveis de domínio e integrações.
 - `supabase/migrations`: única fonte de verdade do banco.
 - `docs/adr`: decisões arquiteturais aceitas.
+- `docs/manual`: manual operacional (o que cada módulo faz e como operar).
 
 ## Pré-requisitos
 
@@ -18,9 +19,10 @@ Node.js 22+, pnpm 10+, Docker Desktop e Supabase CLI.
 
 ```powershell
 pnpm install
-supabase start
 pnpm dev
 ```
+
+Verificacoes antes de abrir um Pull Request: `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`.
 
 Copie `apps/web/.env.example` para `apps/web/.env.local` e mantenha segredos fora do Git. Antes de executar a migration em qualquer ambiente, revise-a e execute os testes de RLS.
 

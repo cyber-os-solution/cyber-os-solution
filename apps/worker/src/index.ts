@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { errText } from './errors.js';
 import { handlers } from './handlers.js';
 import { claimJobs, completeJob, failJob, releaseStaleJobs, type Job } from './jobs.js';
 
@@ -7,15 +8,6 @@ type Level = 'info' | 'warn' | 'error';
 function log(level: Level, msg: string, extra: Record<string, unknown> = {}): void {
   // Uma linha JSON por evento. Sem payload de job e sem dado pessoal.
   console[level === 'error' ? 'error' : 'log'](JSON.stringify({ level, msg, ...extra }));
-}
-
-function errText(error: unknown): string {
-  // Erros do Supabase sao objetos simples (nao Error); String() devolveria "[object Object]".
-  if (error instanceof Error) return error.message;
-  if (typeof error === 'object' && error !== null && 'message' in error) {
-    return String((error as { message: unknown }).message);
-  }
-  return String(error);
 }
 
 function intEnv(name: string, fallback: number, min: number, max: number): number {

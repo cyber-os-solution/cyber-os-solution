@@ -18,6 +18,7 @@ COPY packages/messaging/package.json packages/messaging/package.json
 FROM manifests AS build
 RUN corepack enable
 RUN pnpm install --frozen-lockfile --filter @cyber/worker...
+COPY tsconfig.base.json ./
 COPY apps/worker apps/worker
 RUN pnpm --filter @cyber/worker build
 

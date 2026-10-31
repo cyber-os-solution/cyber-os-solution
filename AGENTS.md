@@ -24,3 +24,18 @@ Repositorio: https://github.com/cyber-os-solution/cyber-os-solution
 ## Stack
 
 Next.js (App Router) + TypeScript, Supabase (PostgreSQL + Auth + RLS), Vercel, Docker, Ngrok, Mercado Pago, Resend. Sem Lovable, sem n8n, sem Edge Functions.
+
+## Qualidade e definicao de pronto
+
+Comandos na raiz (todos devem passar antes de abrir o Pull Request): `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`. A CI roda os mesmos e ainda faz o `docker build` do worker.
+
+Uma mudanca so esta pronta quando:
+1. Os 4 comandos acima passam.
+2. Ha teste para o comportamento novo (testes de banco com pgTAP, simulando usuario; nunca como `service_role`).
+3. A ficha do modulo em `docs/manual/` foi atualizada no mesmo Pull Request.
+4. Nenhum segredo entrou no codigo, no commit ou em log.
+
+## Manual operacional
+
+`docs/manual/README.md` e o indice de modulos (o que faz, onde esta, como operar). Uma copia fica no Projeto do Claude; ao pedir "como funciona o modulo X?", consulte a ficha.
+
