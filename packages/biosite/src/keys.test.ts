@@ -36,3 +36,12 @@ describe('chaves de API', () => {
     expect(sha256Hex(code)).toBe(codeHash);
   });
 });
+
+import { hashIp } from './keys';
+describe('hashIp', () => {
+  it('e deterministico, depende do sal e nao contem o IP', () => {
+    expect(hashIp('1.2.3.4', 's1')).toBe(hashIp('1.2.3.4', 's1'));
+    expect(hashIp('1.2.3.4', 's1')).not.toBe(hashIp('1.2.3.4', 's2'));
+    expect(hashIp('1.2.3.4', 's1')).toMatch(/^[0-9a-f]{64}$/);
+  });
+});

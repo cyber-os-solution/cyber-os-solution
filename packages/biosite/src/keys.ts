@@ -38,3 +38,8 @@ export function newHandoffCode(): { code: string; codeHash: string } {
   const code = randomBytes(24).toString('base64url');
   return { code, codeHash: sha256Hex(code) };
 }
+
+// IP nunca e gravado puro: hash com sal secreto (BIO_IP_SALT). Sem sal, nao se grava nada.
+export function hashIp(ip: string, salt: string): string {
+  return sha256Hex(`${salt}:${ip}`);
+}
