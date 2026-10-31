@@ -10,4 +10,4 @@
 4. **Variaveis do worker:** `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `WORKER_ID`, `POLL_INTERVAL_MS`, `BATCH_SIZE`, `STALE_LOCK_MINUTES`.
 5. **Como criar um tipo de tarefa novo:** registrar o handler em `apps/worker/src/handlers.ts` (deve ser idempotente) e criar o teste ao lado. O handler `system.ping` e o teste de fumaca.
 6. **Cuidados:** so o `service_role` executa essas funcoes; a chave dele nunca vai para o navegador. Nunca registrar payload ou erro com dado pessoal.
-7. **Pendencias:** rodar o pgTAP em banco efemero (P2); `docker build` e validado pela CI (job `worker-image`).
+7. **Pendencias:** nenhuma. `docker build` e validado pela CI (job `worker-image`); o pgTAP roda no job `database`.
