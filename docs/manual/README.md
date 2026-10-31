@@ -14,12 +14,12 @@ Nenhum modulo e entregue sem a ficha atualizada neste diretorio. Mudou comportam
 ## Indice de modulos
 | # | Modulo | O que faz | Ficha | Estado |
 |---|---|---|---|---|
-| 1 | Fundacao multi-tenant | Isola cada cliente (`tenant`) e controla papeis | [01-fundacao.md](01-fundacao.md) | Pronto (hardening aplicado no staging) |
-| 2 | Jobs e Worker | Fila de tarefas em segundo plano | [02-jobs-worker.md](02-jobs-worker.md) | Pronto (falta rodar o pgTAP) |
+| 1 | Fundacao multi-tenant | Isola cada cliente (`tenant`) e controla papeis | [01-fundacao.md](01-fundacao.md) | Pronto; endurecimento P2 no staging (producao ainda nao tem nenhuma migration) |
+| 2 | Jobs e Worker | Fila de tarefas em segundo plano | [02-jobs-worker.md](02-jobs-worker.md) | Pronto (pgTAP e docker build na CI) |
 | 3 | Web | Aplicacao Next.js (paginas, painel, API) | [03-web.md](03-web.md) | Esqueleto no ar |
 | 4 | Ambientes, CI e Deploy | Producao, staging, preview e CI | [04-ambientes-ci-deploy.md](04-ambientes-ci-deploy.md) | Pronto |
-| 5 | Biosite | Pagina publica por cliente, painel, API v1 | [05-biosite.md](05-biosite.md) | Em projeto (fases P2 a P6) |
+| 5 | Biosite | Pagina publica por cliente, painel, API v1 | [05-biosite.md](05-biosite.md) | P0 a P4 prontas no staging (tabelas, API v1, pagina publica, clique). Faltam painel (P5), operador (P6), cobranca (P7), kit B (P8). Ver `parecer-p4.md` |
 | 6 | Relatorios | Metricas por cliente e visao do operador | a criar na P5 | Planejado |
 | 7 | Cobranca e e-mail | Mercado Pago e Resend | a criar na P7 | Planejado |
 
-Tambem: [modelos-a-b.md](modelos-a-b.md) (venda hospedada ou instalada no cliente) e [decisoes.md](decisoes.md) (decisoes de negocio).
+Tambem: [parecer-p4.md](parecer-p4.md) (prontidao e roteiro para producao), [modelos-a-b.md](modelos-a-b.md) (venda hospedada ou instalada no cliente) e [decisoes.md](decisoes.md) (decisoes de negocio).
