@@ -13,3 +13,6 @@ supabase/.branches/
 
 # quarentena local (nao versionar)
 _quarentena/
+
+# gerado pelo Next (next typegen / next dev); nao versionar
+next-env.d.ts
