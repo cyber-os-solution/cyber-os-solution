@@ -10,3 +10,6 @@ supabase/.temp/
 supabase/.branches/
 *.log
 *.tsbuildinfo
+
+# quarentena local (nao versionar)
+_quarentena/

@@ -1,0 +1,11 @@
+**/node_modules
+**/.next
+**/.turbo
+**/dist
+.git
+_quarentena
+docs
+supabase/.temp
+**/.env
+**/.env.*
+!**/.env.example
