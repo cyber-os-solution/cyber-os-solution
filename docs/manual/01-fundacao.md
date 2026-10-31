@@ -6,4 +6,4 @@
 4. **Regras de papel:** `owner` pode tudo. `admin` so concede e altera `viewer` e `agent`, nunca `owner`. `agent` e `viewer` operam conforme a politica de cada tabela.
 5. **Como operar:** toda tabela nova com dados de cliente leva `tenant_id`, RLS ligado e politica usando `is_member`.
 6. **Cuidados:** testar sempre como usuario (`set local role authenticated`), nunca como `service_role`.
-7. **Pendencias (fase P2):** impedir que o ultimo `owner` saia ou se rebaixe; `FORCE ROW LEVEL SECURITY` e revogacao de privilegios padrao.
+7. **Endurecimento (P2, `202610310001_foundation_p2_hardening.sql`):** `FORCE ROW LEVEL SECURITY` nas 4 tabelas; `anon`/`authenticated` sem privilegio padrao (cada migration concede o minimo); o ultimo `owner` nao sai nem e rebaixado. Pendencia: aplicar no staging (aguarda 'PODE').

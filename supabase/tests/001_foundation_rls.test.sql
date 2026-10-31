@@ -1,8 +1,8 @@
 -- pgTAP - fundacao: USAGE no schema private e escalada de papel em memberships.
 -- Rodar: supabase test db   (banco LOCAL; nunca contra staging/producao)
--- STATUS: escrito em 30/10/2026, AINDA NAO EXECUTADO (sem Docker/Supabase local na sessao).
+-- STATUS: executado em 31/10/2026 em Postgres 16 local com pgTAP (harness imitando Supabase) e no CI.
 begin;
-select plan(7);
+select plan(6);
 
 -- fixtures (como postgres)
 insert into auth.users (id, email) values
