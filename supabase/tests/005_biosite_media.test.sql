@@ -49,8 +49,10 @@ select is((select count(*)::int from storage.objects where bucket_id = 'bio-medi
 reset role; set local role authenticated;
 select set_config('request.jwt.claims', json_build_object('sub','00000000-0000-0000-0000-0000000000b1','role','authenticated')::text, true);
 select is((select count(*)::int from storage.objects where bucket_id = 'bio-media'), 0, 'outro tenant nao ve fotos alheias');
-select results_eq($$ with d as (delete from storage.objects where bucket_id = 'bio-media' returning 1) select count(*)::int from d $$, $$ values (0) $$,
-  'outro tenant nao apaga fotos alheias (RLS filtra, 0 linhas)');
+-- o Storage real bloqueia DELETE direto em storage.objects (so a API apaga), entao a regra de
+-- escrita/apagar (a mesma usada nas policies de update e delete) e testada pela funcao
+select is(private.bio_media_can_write('00000000-0000-0000-0000-0000000000f1/00000000-0000-0000-0000-0000000000d1/foto-01.jpg'), false,
+  'outro tenant nao pode alterar nem apagar fotos alheias (regra das policies de update e delete)');
 
 -- anon: nada
 reset role; set local role anon;
