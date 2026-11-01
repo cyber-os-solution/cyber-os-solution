@@ -56,7 +56,7 @@ export interface PublicSection {
 }
 
 export type SectionView =
-  | { kind: 'hero'; id: string; title: string; subtitle: string; imageUrl: string | null; cta: { label: string; href: string } | null }
+  | { kind: 'hero'; id: string; title: string; subtitle: string; imageUrl: string | null; videoUrl: string | null; cta: { label: string; href: string } | null }
   | { kind: 'texto'; id: string; title: string; paragraphs: string[] }
   | { kind: 'catalogo'; id: string; title: string; limit: number }
   | { kind: 'galeria'; id: string; title: string; images: { url: string; alt: string }[] }
@@ -76,6 +76,7 @@ export function toSectionView(slug: string, section: PublicSection): SectionView
         kind: 'hero', id,
         title: text(c.titulo, 120), subtitle: text(c.subtitulo, 300),
         imageUrl: safeUrl(c.imagem_url),
+        videoUrl: safeUrl(c.video_url),
         cta: ctaHref && ctaLabel ? { label: ctaLabel, href: ctaHref } : null,
       };
     }

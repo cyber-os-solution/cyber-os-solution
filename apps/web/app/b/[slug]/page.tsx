@@ -52,8 +52,23 @@ function Section({ view, slug }: { view: SectionView; slug: string }) {
     case 'hero':
       return (
         <header className="bs-hero">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          {view.imageUrl ? <img src={view.imageUrl} alt="" referrerPolicy="no-referrer" /> : null}
+          {view.videoUrl ? (
+            <video
+              className="bs-hero-media"
+              src={view.videoUrl}
+              poster={view.imageUrl ?? undefined}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+              disablePictureInPicture
+            />
+          ) : view.imageUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={view.imageUrl} alt="" referrerPolicy="no-referrer" />
+          ) : null}
           {view.title ? <h1>{view.title}</h1> : null}
           {view.subtitle ? <p>{view.subtitle}</p> : null}
           {view.cta ? <a className="bs-btn" href={view.cta.href} rel="noopener noreferrer">{view.cta.label}</a> : null}

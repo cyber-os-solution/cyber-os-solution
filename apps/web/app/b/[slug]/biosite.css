@@ -5,6 +5,7 @@
 .bs-brand strong { font-size: 1.05rem; }
 .bs-hero { text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; }
 .bs-hero img { width: 100%; aspect-ratio: 4 / 3; max-height: 420px; object-fit: cover; border-radius: var(--bs-radius); }
+.bs-hero video { width: 100%; aspect-ratio: 4 / 5; max-height: 560px; object-fit: cover; border-radius: var(--bs-radius); background: #000; }
 .bs-hero h1 { margin: 0; font-size: 1.75rem; line-height: 1.2; }
 .bs-hero p { margin: 0; opacity: 0.8; }
 .bs-section h2 { margin: 0 0 12px; font-size: 1.15rem; }

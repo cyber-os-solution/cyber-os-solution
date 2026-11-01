@@ -1,6 +1,6 @@
 -- pgTAP - midia do biosite (P5a): bucket, limites e escrita so por membro do tenant dono.
 begin;
-select plan(14);
+select plan(16);
 
 insert into auth.users (id, email) values
   ('00000000-0000-0000-0000-0000000000a3', 'agent1@t.local'),
@@ -20,7 +20,7 @@ insert into public.biosites (id, tenant_id, niche_key, slug, title) values
 select is((select public from storage.buckets where id = 'bio-media'), true, 'bucket bio-media existe e e publico');
 select is((select file_size_limit from storage.buckets where id = 'bio-media'), 5242880::bigint, 'limite de 5 MB por arquivo');
 select is((select allowed_mime_types from storage.buckets where id = 'bio-media'),
-  array['image/jpeg','image/png','image/webp'], 'so jpeg, png e webp (sem SVG)');
+  array['image/jpeg','image/png','image/webp','video/mp4'], 'so jpeg, png, webp e mp4 (sem SVG)');
 
 -- agent do tenant 1
 set local role authenticated;
@@ -31,6 +31,10 @@ select throws_ok($$ insert into storage.objects (bucket_id, name) values ('bio-m
   '42501', null, 'agent nao envia para biosite de outro tenant (mesmo usando a pasta do seu tenant)');
 select throws_ok($$ insert into storage.objects (bucket_id, name) values ('bio-media', '00000000-0000-0000-0000-0000000000f2/00000000-0000-0000-0000-0000000000d2/foto.jpg') $$,
   '42501', null, 'agent nao envia para a pasta de outro tenant');
+select lives_ok($$ insert into storage.objects (bucket_id, name) values ('bio-media', '00000000-0000-0000-0000-0000000000f1/00000000-0000-0000-0000-0000000000d1/hero.mp4') $$,
+  'agent envia video mp4 para o proprio biosite');
+select throws_ok($$ insert into storage.objects (bucket_id, name) values ('bio-media', '00000000-0000-0000-0000-0000000000f1/00000000-0000-0000-0000-0000000000d1/video.mov') $$,
+  '42501', null, 'outro formato de video (mov) e recusado');
 select throws_ok($$ insert into storage.objects (bucket_id, name) values ('bio-media', '00000000-0000-0000-0000-0000000000f1/00000000-0000-0000-0000-0000000000d1/logo.svg') $$,
   '42501', null, 'extensao fora da lista (svg) e recusada');
 select throws_ok($$ insert into storage.objects (bucket_id, name) values ('bio-media', '00000000-0000-0000-0000-0000000000f1/00000000-0000-0000-0000-0000000000d1/../x.jpg') $$,
@@ -43,7 +47,7 @@ reset role; set local role authenticated;
 select set_config('request.jwt.claims', json_build_object('sub','00000000-0000-0000-0000-0000000000a4','role','authenticated')::text, true);
 select throws_ok($$ insert into storage.objects (bucket_id, name) values ('bio-media', '00000000-0000-0000-0000-0000000000f1/00000000-0000-0000-0000-0000000000d1/foto-02.jpg') $$,
   '42501', null, 'viewer nao envia foto');
-select is((select count(*)::int from storage.objects where bucket_id = 'bio-media'), 1, 'viewer ve as fotos do proprio tenant');
+select is((select count(*)::int from storage.objects where bucket_id = 'bio-media'), 2, 'viewer ve as midias do proprio tenant');
 
 -- dono do tenant 2: nao ve nem apaga nada do tenant 1
 reset role; set local role authenticated;
