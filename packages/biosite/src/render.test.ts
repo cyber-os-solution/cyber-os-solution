@@ -31,6 +31,13 @@ describe('toSectionView', () => {
     expect(v).toMatchObject({ kind: 'hero', title: 'Oi', imageUrl: null, cta: null });
   });
 
+  it('hero aceita video_url https e descarta video inseguro', () => {
+    const ok = toSectionView('loja', s('hero', { titulo: 'Oi', imagem_url: 'https://x/capa.jpg', video_url: 'https://x/v.mp4' }));
+    expect(ok).toMatchObject({ kind: 'hero', imageUrl: 'https://x/capa.jpg', videoUrl: 'https://x/v.mp4' });
+    const bad = toSectionView('loja', s('hero', { titulo: 'Oi', video_url: 'http://x/v.mp4' }));
+    expect(bad).toMatchObject({ kind: 'hero', videoUrl: null });
+  });
+
   it('links passam pelo rastreio /r/<slug>/<id> e escondem a url real', () => {
     const v = toSectionView('loja', s('links', { links: [
       { id: 'insta', label: 'Instagram', url: 'https://instagram.com/x' },

@@ -1,4 +1,4 @@
-// Envia fotos de uma pasta para o Storage (bucket bio-media) de um biosite e imprime os URLs https publicos.
+// Envia fotos (e video mp4 de ate 5 MB) de uma pasta para o Storage (bucket bio-media) de um biosite e imprime os URLs https publicos.
 // Uso (na raiz do repositorio):
 //   node --env-file=apps/web/.env.local apps/web/scripts/upload-biosite-media.mjs "<slug-do-biosite>" "<pasta-com-fotos>"
 // Grava no projeto Supabase apontado por apps/web/.env.local. Idempotente: reenviar o mesmo nome substitui o arquivo.
@@ -18,7 +18,7 @@ if (!url || !serviceKey) {
   process.exit(1);
 }
 
-const TYPES = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
+const TYPES = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.mp4': 'video/mp4' };
 const MAX_BYTES = 5 * 1024 * 1024;
 
 const db = createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
@@ -34,7 +34,7 @@ const files = readdirSync(dir)
   .filter((f) => TYPES[extname(f).toLowerCase()])
   .sort();
 if (files.length === 0) {
-  console.error(`Nenhuma foto (.jpg, .jpeg, .png, .webp) em ${dir}`);
+  console.error(`Nenhum arquivo (.jpg, .jpeg, .png, .webp, .mp4) em ${dir}`);
   process.exit(1);
 }
 
