@@ -1,0 +1,95 @@
+/* Home publica (H1). Tudo sob .home para nao vazar para /b, /r e /admin. */
+body:has(.home) { margin: 0; }
+.home {
+  --ink: #1b1613; --muted: #5d5148; --bg: #fbf8f3; --card: #ffffff; --line: #e9e1d6;
+  --accent: #1f7a4d; --accent-ink: #ffffff; --choc: #3b2418;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink); background: var(--bg); line-height: 1.55; min-height: 100vh;
+}
+@media (prefers-color-scheme: dark) {
+  .home { --ink: #f3ece4; --muted: #b8aca0; --bg: #14100d; --card: #1e1814; --line: #332a23; --accent: #3fae78; --accent-ink: #0b1a12; }
+}
+.home * { box-sizing: border-box; }
+.home a { color: inherit; }
+.home h1, .home h2, .home h3 { line-height: 1.15; margin: 0; }
+.home p { margin: 0; }
+
+.h-nav { display: flex; align-items: center; gap: 16px; padding: 14px 16px; max-width: 1080px; margin: 0 auto; }
+.h-logo { font-weight: 800; text-decoration: none; letter-spacing: -0.01em; margin-right: auto; }
+.h-nav nav { display: none; gap: 20px; }
+.h-nav nav a { text-decoration: none; color: var(--muted); font-size: 0.95rem; }
+@media (min-width: 720px) { .h-nav nav { display: flex; } .h-logo { margin-right: 0; } .h-nav nav { margin-right: auto; margin-left: 24px; } }
+
+.h-btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 22px; border-radius: 999px; background: var(--accent); color: var(--accent-ink) !important; font-weight: 700; text-decoration: none; min-height: 48px; border: 2px solid var(--accent); }
+.h-btn-sm { padding: 8px 16px; min-height: 40px; font-size: 0.9rem; }
+.h-btn-ghost { background: transparent; color: var(--ink) !important; border-color: var(--line); }
+.h-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.h-actions-center { justify-content: center; }
+
+.h-hero { display: grid; gap: 32px; padding: 24px 16px 48px; max-width: 1080px; margin: 0 auto; align-items: center; }
+.h-hero h1 { font-size: clamp(2rem, 7vw, 3.4rem); letter-spacing: -0.02em; }
+.h-hero p { margin-top: 16px; font-size: 1.1rem; color: var(--muted); max-width: 34rem; }
+@media (min-width: 860px) { .h-hero { grid-template-columns: 1.1fr 0.9fr; padding-top: 48px; } }
+
+.h-phone { justify-self: center; width: min(280px, 78vw); padding: 10px; border-radius: 36px; background: #111; box-shadow: 0 24px 60px rgba(40, 20, 10, 0.25); }
+.h-phone-screen { border-radius: 28px; overflow: hidden; background: #fff; color: #1b1613; }
+.h-phone-video { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: #000; }
+.h-phone-body { padding: 12px 14px 16px; display: grid; gap: 8px; font-size: 0.8rem; }
+.h-phone-body strong { font-size: 1rem; }
+.h-phone-body > span { color: #5d5148; }
+.h-phone-item { display: flex; justify-content: space-between; padding: 8px 10px; border: 1px solid #e9e1d6; border-radius: 10px; }
+.h-phone-cta { text-align: center; padding: 10px; border-radius: 999px; background: #1f7a4d; color: #fff; font-weight: 700; }
+
+.h-section { padding: 40px 16px; max-width: 1080px; margin: 0 auto; }
+.h-section h2, .h-final h2 { font-size: clamp(1.5rem, 4.5vw, 2.2rem); letter-spacing: -0.01em; }
+.h-sub { margin-top: 10px; color: var(--muted); }
+.h-cards { display: grid; gap: 14px; margin-top: 24px; }
+@media (min-width: 720px) { .h-cards { grid-template-columns: repeat(4, 1fr); } }
+.h-card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.h-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+.h-card p { color: var(--muted); font-size: 0.95rem; }
+
+.h-strip { list-style: none; padding: 0; margin: 24px -16px 0; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-inline: 16px; padding-bottom: 12px; -webkit-overflow-scrolling: touch; }
+.h-niche { flex: 0 0 min(240px, 70vw); scroll-snap-align: start; background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.h-niche img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.h-niche span { display: block; padding: 12px 14px; font-weight: 700; }
+
+.h-videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
+.h-vid { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; background: #000; display: block; }
+
+.h-steps { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 14px; }
+@media (min-width: 720px) { .h-steps { grid-template-columns: repeat(3, 1fr); } }
+.h-steps li { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.h-steps h3 { font-size: 1.1rem; margin: 10px 0 6px; }
+.h-steps p { color: var(--muted); font-size: 0.95rem; }
+.h-step-n { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--choc); color: #fff; font-weight: 800; }
+
+.h-faq { margin-top: 20px; display: grid; gap: 10px; }
+.h-faq details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.h-faq summary { cursor: pointer; font-weight: 700; }
+.h-faq p { margin-top: 10px; color: var(--muted); }
+
+.h-final { text-align: center; padding: 56px 16px; background: var(--choc); color: #fff; }
+.h-final .h-url { margin-top: 14px; font-family: ui-monospace, Menlo, Consolas, monospace; background: rgba(255, 255, 255, 0.12); display: inline-block; padding: 10px 16px; border-radius: 12px; word-break: break-all; }
+.h-final .h-url em { font-style: normal; opacity: 0.7; }
+.h-final .h-btn-ghost { color: #fff !important; border-color: rgba(255, 255, 255, 0.4); }
+
+.h-footer { display: flex; justify-content: space-between; gap: 12px; padding: 20px 16px; max-width: 1080px; margin: 0 auto; color: var(--muted); font-size: 0.9rem; }
+@media (prefers-reduced-motion: no-preference) { .h-btn { transition: transform 0.15s ease; } .h-btn:hover { transform: translateY(-1px); } }
+
+/* Celular: o carrossel vira um quadro; um modelo por vez, inteiro, sem a borda do proximo aparecer. */
+@media (max-width: 719px) {
+  .h-strip {
+    margin: 24px 0 0; gap: 40px; padding: 14px; scroll-padding-inline: 14px;
+    border: 1px solid var(--line); border-radius: 24px; background: var(--card);
+    scrollbar-width: none; overscroll-behavior-x: contain;
+  }
+  .h-strip::-webkit-scrollbar { display: none; }
+  .h-niche { flex: 0 0 100%; width: 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+}
+
+/* Botao flutuante de WhatsApp */
+.home .h-float{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:50;display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.28);opacity:0;transform:translateY(12px) scale(.9);pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+.home .h-float.is-on{opacity:1;transform:none;pointer-events:auto}
+.home .h-float:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.home .h-float{transition:none}}
