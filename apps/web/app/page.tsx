@@ -3,7 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { contactHref, EXAMPLE_PATH, SITE_NAME, SITE_URL } from '../lib/site';
 import { LazyVideo } from './_components/lazy-video';
-import { WhatsAppFloat } from './_components/whatsapp-float';
+import { PhoneSpin } from './_components/phone-spin';
+import { WhatsAppChat } from './_components/whatsapp-chat';
 import './home.css';
 
 export const metadata: Metadata = {
@@ -93,18 +94,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="h-phone" aria-hidden="true">
-            <div className="h-phone-screen">
-              <LazyVideo src="/home/phone.mp4" poster="/home/phone.webp" className="h-phone-video" label="Brownies da Gi" />
-              <div className="h-phone-body">
-                <strong>Brownies da Gi</strong>
-                <span>Casquinha crocante por fora, massa úmida por dentro.</span>
-                <div className="h-phone-item"><span>Brownie tradicional</span><b>R$ 6</b></div>
-                <div className="h-phone-item"><span>Brownie com recheio</span><b>R$ 12</b></div>
-                <div className="h-phone-cta">Pedir no WhatsApp</div>
-              </div>
-            </div>
-          </div>
+          <PhoneSpin />
         </section>
 
         <section className="h-section" aria-labelledby="beneficios">
@@ -182,7 +172,7 @@ export default function HomePage() {
         <a href={EXAMPLE_PATH}>Página de exemplo</a>
       </footer>
 
-      {contato ? <WhatsAppFloat href={contato} label="Falar com a gente no WhatsApp" /> : null}
+      {contato ? <WhatsAppChat /> : null}
     </div>
   );
 }

@@ -10,3 +10,9 @@ export function contactHref(): string | null {
   const text = encodeURIComponent('Oi! Quero uma pagina do Pedidos na Bio para o meu negocio.');
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
 }
+
+// Link do WhatsApp com texto ja escrito. Usado pelo chat da home.
+export function waUrl(text: string): string | null {
+  if (!/^\d{12,13}$/.test(WHATSAPP_NUMBER)) return null;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+}
