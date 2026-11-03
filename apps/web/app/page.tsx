@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { contactHref, EXAMPLE_PATH, SITE_NAME, SITE_URL } from '../lib/site';
 import { LazyVideo } from './_components/lazy-video';
+import { NicheCarousel } from './_components/niche-carousel';
 import { PhoneSpin } from './_components/phone-spin';
 import { WhatsAppChat } from './_components/whatsapp-chat';
 import './home.css';
@@ -111,15 +111,8 @@ export default function HomePage() {
 
         <section className="h-section" id="modelos" aria-labelledby="modelos-t">
           <h2 id="modelos-t">Modelos para o seu tipo de negócio</h2>
-          <p className="h-sub">Deslize para ver. Cada nicho tem um modelo pronto com as cores e o jeito de vender dele.</p>
-          <ul className="h-strip">
-            {NICHOS.map((n) => (
-              <li key={n.slug} className="h-niche">
-                <Image src={`/home/niches/${n.slug}.webp`} alt="" width={720} height={540} unoptimized loading="lazy" />
-                <span>{n.nome}</span>
-              </li>
-            ))}
-          </ul>
+          <p className="h-sub">Cada nicho tem um modelo pronto com as cores e o jeito de vender dele.</p>
+          <NicheCarousel nichos={NICHOS} />
         </section>
 
         <section className="h-section" aria-labelledby="movimento">
