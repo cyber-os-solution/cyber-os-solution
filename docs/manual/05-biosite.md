@@ -22,6 +22,12 @@
    - Exige `actor.email` no pedido do integrador; sem e-mail, o codigo e recusado (400) depois de consumido.
    - Cria o usuario Auth com e-mail confirmado (se ja existe, segue), gera magic link e troca por sessao via `verifyOtp` (cookies `@supabase/ssr`).
    - Concede papel `agent` no tenant do biosite (`bio_grant_membership`); nunca `owner`.
-   - Sucesso: 303 para `/admin` (painel ainda nao existe). Codigo invalido/usado/expirado: 401. Falha de servico: 503 sem detalhe do banco.
+   - Sucesso: 303 para `/admin`. Codigo invalido/usado/expirado: 401. Falha de servico: 503 sem detalhe do banco.
+13. **Painel `/admin` (P5, v1):** pagina `apps/web/app/admin/page.tsx`, acoes em `app/admin/actions.ts`.
+   - Usa a sessao do usuario (chave anon + cookies). Nao usa `service_role`: o RLS decide o que pode gravar.
+   - Sem sessao: mostra so a instrucao de pedir link ao integrador.
+   - Papel `agent`: edita secoes (texto em JSON, valores validados por `lib/biosite/admin-config.ts`, campos fora da lista sao descartados) e liga/desliga; cria e apaga itens do catalogo.
+   - Nao edita titulo, tema, publicacao (exige `admin`/`owner`). Nao reordena secoes ainda.
+   - Testes: `lib/biosite/admin-config.test.ts` (8). Ainda sem pgTAP para `agent` gravando secoes/catalogo: lacuna a fechar.
    - Testes: `lib/biosite/handoff.test.ts` (5, com dependencias falsas). Fluxo ponta a ponta no staging ainda nao foi testado.
-13. **Pendencias:** `Idempotency-Key` por cabecalho (hoje a idempotencia e pela chave natural); contagem de visualizacoes (hoje so cliques); aplicar 0001 a 0005 em producao (backup + 'PODE PRODUCAO'); painel `/admin` (P5, falta); decidir papel do handoff (`agent` hoje; `admin` edita configuracao, mas nao publica).
+14. **Pendencias:** `Idempotency-Key` por cabecalho (hoje a idempotencia e pela chave natural); contagem de visualizacoes (hoje so cliques); aplicar 0001 a 0005 em producao (backup + 'PODE PRODUCAO'); painel: editor por campo (hoje JSON), reordenar secoes, editar titulo/tema para `admin`; fluxo handoff -> painel ainda nao testado ponta a ponta no staging; pgTAP do papel `agent` no painel.
