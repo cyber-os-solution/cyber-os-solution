@@ -65,10 +65,5 @@ reset role;
 select ok(not has_function_privilege('authenticated', 'public.bio_consume_handoff(text)', 'execute'),
   'catalogo: authenticated sem EXECUTE em bio_consume_handoff');
 
--- Mostra o resumo do pgTAP como erro. Erro aborta a transacao: tudo e revertido (nada fica no banco).
-do $$
-declare r text;
-begin
-  select string_agg(line, E'\n') into r from finish() as line;
-  raise exception E'RESULTADO pgTAP (revertido):\n%', r;
-end $$;
+select * from finish();
+rollback;
