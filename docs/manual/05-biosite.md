@@ -29,5 +29,6 @@
    - Papel `agent`: edita secoes (texto em JSON, valores validados por `lib/biosite/admin-config.ts`, campos fora da lista sao descartados) e liga/desliga; cria e apaga itens do catalogo.
    - Nao edita titulo, tema, publicacao (exige `admin`/`owner`). Nao reordena secoes ainda.
    - Testes: `lib/biosite/admin-config.test.ts` (8). Ainda sem pgTAP para `agent` gravando secoes/catalogo: lacuna a fechar.
+   - Teste ponta a ponta no staging (servidor local apontando para o staging, 11 checks): provisiona, gera codigo, consome (303 + sessao), reuso recusado (401), painel mostra biosite e secoes, sem sessao nao mostra dados. Dados de teste ficaram no staging (biosite `e2e-p5-*`, chave revogada).
    - Testes: `lib/biosite/handoff.test.ts` (5, com dependencias falsas). Fluxo ponta a ponta no staging ainda nao foi testado.
-14. **Pendencias:** `Idempotency-Key` por cabecalho (hoje a idempotencia e pela chave natural); contagem de visualizacoes (hoje so cliques); aplicar 0001 a 0005 em producao (backup + 'PODE PRODUCAO'); painel: editor por campo (hoje JSON), reordenar secoes, editar titulo/tema para `admin`; fluxo handoff -> painel ainda nao testado ponta a ponta no staging; pgTAP do papel `agent` no painel.
+14. **Pendencias:** `Idempotency-Key` por cabecalho (hoje a idempotencia e pela chave natural); contagem de visualizacoes (hoje so cliques); aplicar 0001 a 0005 em producao (backup + 'PODE PRODUCAO'); painel: editor por campo (hoje JSON), reordenar secoes, editar titulo/tema para `admin`; pgTAP do papel `agent` gravando secoes e catalogo.
